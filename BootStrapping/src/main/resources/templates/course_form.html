@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<link th:href="@{/css/style.css}" rel="stylesheet" />
+	<title>Course Information</title>
+</head>
+
+<body>
+	<div th:replace="/commons/banner.html"></div>
+	<div th:replace="/commons/sidebar.html"></div>
+	<div class="mainbody">
+		<h2>Course Information</h2>
+		<div>
+			<form method="post" th:action="@{/course}" th:object="${course}">
+				<div><label>Select Course-Code:</label>
+					<select th:field="*{course_code}">
+						<option th:each="c : ${courseCode}" th:value="${c}" th:text="${c}" />
+					</select>
+					<input type="submit" value="Search">
+				</div>
+			</form>
+		</div>
+		<br>
+		<div>
+			<table border="1" class="table-striped table-responsive-md" align="center">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Code</th>
+						<th>Name</th>
+						<th>Description</th>
+						<th>Faculty</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="c : ${courseDetail}">
+						<td th:text="${c.id}"></td>
+						<td th:text="${c.course_code}"></td>
+						<td th:text="${c.course_name}"></td>
+						<td th:text="${c.course_des}"></td>
+						<td th:text="${c.faculty}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+
+</html>

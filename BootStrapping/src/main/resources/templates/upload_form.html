@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link th:href="@{/css/style.css}" rel="stylesheet" />
+<title>Upload Excel File</title>
+</head>
+
+<body>
+<div th:replace="~{/commons/banner.html}" ></div>
+<div th:replace="~{/commons/sidebar.html}" ></div>
+<div class="mainbody">
+	<h2>Upload Excel File</h2>
+
+	<!-- File Upload Form -->
+	<form method="post" th:action="@{/upload}" enctype="multipart/form-data">
+		<input type="file" name="file" />
+		<button type="submit">Upload</button>
+	</form>
+
+
+	<!-- Display Uploaded File Name -->
+	<div th:if="${filename}">
+		<h3>Uploaded File Name: <span th:text="${filename}"></span></h3>
+	</div>
+	
+	<!-- Display Uploaded File Data -->
+	<div th:if="${excelData}" >
+
+		<form method="post" th:action="@{/savefile}">
+			<h3>Uploaded File Data:</h3>
+		
+			<table border="1" align="center">
+			<tr th:each="row : ${excelData}">
+				<td th:each="cell : ${row}" th:text="${cell}"></td>
+			</tr>
+			</table>
+		
+			<button type="submit">Save</button>
+		</form>
+
+	</div>
+
+</div>
+</body>
+</html>
